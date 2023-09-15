@@ -391,7 +391,7 @@ namespace StarterAssets
             }
         }
 
-        public void SetSensitivitty(float newSensitivity)
+        public void SetSensitivity(float newSensitivity)
         {
             Sensitivity = newSensitivity;
         }
