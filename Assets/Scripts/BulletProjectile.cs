@@ -7,7 +7,9 @@ public class BulletProjectile : MonoBehaviour
 {
     [SerializeField] private Transform vfxHitGreen;
     [SerializeField] private Transform vfxHitRed;
+    [SerializeField] private int damage;
     private Rigidbody bulletRigidbody;
+    [SerializeField]float speed = 100f;
     private float Lifetime=4f;
     private void Awake()
     {
@@ -15,7 +17,8 @@ public class BulletProjectile : MonoBehaviour
     }
     private void Start()
     {
-        float speed = 100f;
+       
+       
         bulletRigidbody.velocity = transform.forward * speed;
         Destroy(gameObject,Lifetime);
     }
@@ -28,6 +31,13 @@ public class BulletProjectile : MonoBehaviour
         else { 
             // Instantiate(vfxHitRed, transform.position, Quaternion.identity);
 
+        }
+        if (other.CompareTag("Enemy"))
+        {
+            var enemy = other.GetComponent<Enemy>();
+            if (enemy != null) {
+                enemy.TakeDamage(damage);
+            }
         }
         Destroy(gameObject);
     }

@@ -1144,7 +1144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3789645155248950208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.43, z: 0.61}
+  m_LocalPosition: {x: 0, y: 1.469, z: 0.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2235,7 +2235,7 @@ Transform:
   - {fileID: 2432875696181307407}
   - {fileID: 8508595337663441909}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7238533721009356544
 Animator:
@@ -2484,7 +2484,6 @@ MonoBehaviour:
   aimColliderLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  debugTransform: {fileID: 0}
   pfBulletProjectile: {fileID: 4540688176793921794, guid: cfd2c6d1c379ffa4791c0d15a5c2b353,
     type: 3}
   spawnBulletposition: {fileID: 8508595337663441909}
