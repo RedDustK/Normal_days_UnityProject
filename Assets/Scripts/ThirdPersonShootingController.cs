@@ -13,14 +13,14 @@ public class ThirdPersonShootingController : MonoBehaviour
     [SerializeField] private float normalSensitivity;
     [SerializeField] private float aimSensitivty;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
-    [SerializeField] private Transform debugTransform;
+   // [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private Transform spawnBulletposition;
     [SerializeField] Camera _mainCamera;
     [SerializeField] private GameObject AimImage;
     public float RotationSmoothTime = 0.05f;
     float _rotationVelocity;
-
+    private bool shotdelay=true;
     private StarterAssetsInputs StarterAssetsInputs;
     private ThirdPersonController thirdPersonController;
     private Animator animator;
@@ -38,7 +38,7 @@ public class ThirdPersonShootingController : MonoBehaviour
         Transform hitTransform = null;
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
-            debugTransform.position = raycastHit.point;
+           // debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
             hitTransform = raycastHit.transform;
         }
@@ -47,11 +47,14 @@ public class ThirdPersonShootingController : MonoBehaviour
         if (StarterAssetsInputs.aim)
         {
             Aim(mouseWorldPosition);
-            if (StarterAssetsInputs.shoot && StarterAssetsInputs.aim)
+            if (StarterAssetsInputs.shoot && StarterAssetsInputs.aim&&shotdelay)
             {
+                shotdelay = false;
                 Vector3 aimDir = (mouseWorldPosition - spawnBulletposition.position).normalized;
                 Instantiate(pfBulletProjectile, spawnBulletposition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                StartCoroutine(WaitForIt());
                 StarterAssetsInputs.shoot = false;
+                
             }
         }
 
@@ -89,4 +92,16 @@ public class ThirdPersonShootingController : MonoBehaviour
         // rotate to face input direction relative to camera position
         transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
     }
+
+    IEnumerator WaitForIt()
+    {
+        yield return new WaitForSeconds(1.0f);
+        shotdelay = true;
+        
+    }
+
+
+ 
+ 
+
 }
