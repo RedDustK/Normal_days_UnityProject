@@ -11,10 +11,16 @@ public class OverManager : MonoBehaviour
     [SerializeField] Button ToTitleButton;
     [SerializeField] GameObject clearText;
     [SerializeField] GameObject GameoverText;
+    [SerializeField] GameObject PressText;
+    [SerializeField]float time;
+    bool CanPressbutton;
     // Start is called before the first frame update
     void Start()
     {
-        ToTitleButton.onClick.AddListener(OnClickedToTitleButton);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        PressText.SetActive(false);
+        //ToTitleButton.onClick.AddListener(OnClickedToTitleButton);
         if (GameManager.Instance.clear)
         {
             clearText.SetActive(true);
@@ -25,6 +31,8 @@ public class OverManager : MonoBehaviour
             GameoverText.SetActive(true);
             clearText.SetActive(false);
         }
+
+        StartCoroutine(wait());
     }
 
     private void OnClickedToTitleButton()
@@ -32,11 +40,24 @@ public class OverManager : MonoBehaviour
         SceneManager.LoadScene("TitleScene");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
+        if (Input.anyKey&&CanPressbutton)
+        {
+            CanPressbutton = false;
+            OnClickedToTitleButton();
+        }
     }
+
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(time);
+        CanPressbutton = true;
+        PressText.SetActive(true);
+    }
+
+
 
 
 }

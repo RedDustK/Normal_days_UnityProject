@@ -19,6 +19,7 @@ public class Enemy :Unit
        Agent = GetComponent<NavMeshAgent>(); 
        animator = GetComponent<Animator>();
        Target = GameObject.Find("Woman").transform;
+
     }
 
     // Update is called once per frame

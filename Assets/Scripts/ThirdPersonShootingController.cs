@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
-using UnityEngine.InputSystem;
-using UnityEditor.EventSystems;
-using Unity.VisualScripting;
+
 
 public class ThirdPersonShootingController : MonoBehaviour
 {
