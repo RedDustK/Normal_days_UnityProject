@@ -18,6 +18,8 @@ public class ThirdPersonShootingController : MonoBehaviour
     [SerializeField] private Transform spawnBulletposition;
     [SerializeField] Camera _mainCamera;
     [SerializeField] private GameObject AimImage;
+    [SerializeField] private GameObject Gun;
+    [SerializeField] private float WaitGunSec;
     public float RotationSmoothTime = 0.05f;
     float _rotationVelocity;
     private bool shotdelay=true;
@@ -38,19 +40,24 @@ public class ThirdPersonShootingController : MonoBehaviour
         Transform hitTransform = null;
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
-           // debugTransform.position = raycastHit.point;
+            //debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
             hitTransform = raycastHit.transform;
         }
+      
+        
 
 
         if (StarterAssetsInputs.aim)
         {
+            
+            AimImage.gameObject.SetActive(true);
             Aim(mouseWorldPosition);
             if (StarterAssetsInputs.shoot && StarterAssetsInputs.aim&&shotdelay)
             {
                 shotdelay = false;
                 Vector3 aimDir = (mouseWorldPosition - spawnBulletposition.position).normalized;
+                Debug.Log(aimDir);
                 Instantiate(pfBulletProjectile, spawnBulletposition.position, Quaternion.LookRotation(aimDir, Vector3.up));
                 StartCoroutine(WaitForIt());
                 StarterAssetsInputs.shoot = false;
@@ -60,6 +67,7 @@ public class ThirdPersonShootingController : MonoBehaviour
 
         else
         {
+            Gun.SetActive(false);
             StarterAssetsInputs.shoot = false;
             AimImage.gameObject.SetActive(false);
             aimVirtualCamera.gameObject.SetActive(false);
@@ -74,12 +82,13 @@ public class ThirdPersonShootingController : MonoBehaviour
 
     private void Aim(Vector3 mouseWorldPosition)
     {
+        Gun.SetActive(true);
         //animator.SetBool("IsPistol", true);
         aimVirtualCamera.gameObject.SetActive(true);
         thirdPersonController.SetSensitivity(aimSensitivty);
         thirdPersonController.SetRotateOnMove(false);
         animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
-        AimImage.gameObject.SetActive(true);
+        
 
         Vector3 worldAimTarget = mouseWorldPosition;
         worldAimTarget.y = transform.position.y;
@@ -95,7 +104,7 @@ public class ThirdPersonShootingController : MonoBehaviour
 
     IEnumerator WaitForIt()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(WaitGunSec);
         shotdelay = true;
         
     }

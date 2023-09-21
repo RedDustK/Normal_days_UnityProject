@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4468098776309346119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.039036393, y: 1.664, z: 1.398}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.398}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,7 +115,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4468098776309346119}
   serializedVersion: 4
-  m_Mass: 0.005
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -132,7 +132,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 2
 --- !u!114 &5588947898704355262
 MonoBehaviour:
@@ -148,5 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfxHitGreen: {fileID: 0}
   vfxHitRed: {fileID: 0}
-  damage: 45
+  damage: 80
   speed: 80

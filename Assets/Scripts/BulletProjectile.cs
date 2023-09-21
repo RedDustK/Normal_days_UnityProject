@@ -38,7 +38,8 @@ public class BulletProjectile : MonoBehaviour
             if (enemy != null) {
                 enemy.TakeDamage(damage);
             }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+       
     }
 }

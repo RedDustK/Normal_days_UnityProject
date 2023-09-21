@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
         HP -= damage;
         if (HP <= 0) 
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
