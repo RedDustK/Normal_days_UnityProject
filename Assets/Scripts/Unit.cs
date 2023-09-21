@@ -18,12 +18,5 @@ public class Unit : MonoBehaviour
     {
         
     }
-    public void TakeDamage(int damage)
-    {
-        HP -= damage;
-        if (HP <= 0) 
-        {
-            //Destroy(gameObject);
-        }
-    }
+ 
 }

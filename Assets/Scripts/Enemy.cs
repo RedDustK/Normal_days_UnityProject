@@ -11,6 +11,7 @@ public class Enemy :Unit
     [SerializeField] Animator animator;
     Player player;
     public bool attack;
+    public bool Died;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,17 +19,15 @@ public class Enemy :Unit
        Agent = GetComponent<NavMeshAgent>(); 
        animator = GetComponent<Animator>();
        Target = GameObject.Find("Woman").transform;
-       player=GameObject.Find("Woman").GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Target != null && !attack)
+        if (Target != null && !attack&&!Died)
         {
             animator.SetBool("IsRunning", true);
             Agent.destination = Target.position;
-
 
         }
 
@@ -43,11 +42,26 @@ public class Enemy :Unit
 
     public void DamagetoPlayer()
     {
-        player.TakeDamage(AttackDamage);
+        GameManager.Instance.player.TakeDamage(AttackDamage);
+        animator.SetBool("IsAttack", false);
         AttackMove(false);
         attack=false;
     }
-   
+    public void TakeDamage(int damage)
+    {
+        HP -= damage;
+        if (HP <= 0)
+        {
+            Died = true;
+            animator.SetTrigger("Die");
+            Destroy(gameObject, 0.8f);
+            
+        }
+    }
+    public void running()
+    {
+        animator.SetBool("IsRunning", true);
+    }
 
-   
+
 }

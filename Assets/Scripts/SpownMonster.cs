@@ -8,12 +8,13 @@ public class SpownMonster : MonoBehaviour
     public GameObject[] EnemyPf;
     public float SpawnInterval;
     public float SpawnDistance;
-
+    bool SpawnStart;
     public GameObject SpawnPlace;
+    IEnumerator enumerator;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnMonster()); 
+       
     }
 
     // Update is called once per frame
@@ -42,5 +43,25 @@ public class SpownMonster : MonoBehaviour
             yield return new WaitForSeconds(SpawnInterval);
         }
        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!SpawnStart && other.gameObject.CompareTag("Player"))
+        {
+            enumerator = SpawnMonster();
+            StartCoroutine(enumerator);
+            SpawnStart = true;
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StopCoroutine(enumerator);
+            SpawnStart=false;
+        }
+        
     }
 }

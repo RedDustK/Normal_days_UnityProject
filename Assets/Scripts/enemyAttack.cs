@@ -28,6 +28,7 @@ public class enemyAttack : MonoBehaviour
             enemy.AttackMove(false);
             m_isPlayerinRange = false;
             enemy.attack = false;
+            enemy.running();
         }
     }
 
@@ -44,6 +45,12 @@ public class enemyAttack : MonoBehaviour
                 enemy.AttackMove(true);
                 enemy.attack=true;
             }
+        }
+        else
+        {
+            enemy.AttackMove(false);
+            m_isPlayerinRange = false;
+            enemy.attack = false;
         }
     }
 }

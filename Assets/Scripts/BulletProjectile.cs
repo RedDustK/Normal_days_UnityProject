@@ -10,7 +10,8 @@ public class BulletProjectile : MonoBehaviour
     [SerializeField] private int damage;
     private Rigidbody bulletRigidbody;
     [SerializeField]float speed = 100f;
-    private float Lifetime=4f;
+    private float Lifetime=0.35f;
+
     private void Awake()
     {
         bulletRigidbody = GetComponent<Rigidbody>();
@@ -18,7 +19,7 @@ public class BulletProjectile : MonoBehaviour
     private void Start()
     {
        
-       
+
         bulletRigidbody.velocity = transform.forward * speed;
         Destroy(gameObject,Lifetime);
     }

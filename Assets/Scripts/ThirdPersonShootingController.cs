@@ -20,6 +20,8 @@ public class ThirdPersonShootingController : MonoBehaviour
     [SerializeField] private GameObject AimImage;
     [SerializeField] private GameObject Gun;
     [SerializeField] private float WaitGunSec;
+   // public AudioClip firefpx;
+    public AudioSource audioSource;
     public float RotationSmoothTime = 0.05f;
     float _rotationVelocity;
     private bool shotdelay=true;
@@ -31,6 +33,7 @@ public class ThirdPersonShootingController : MonoBehaviour
         StarterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
         animator = GetComponent<Animator>();
+        audioSource= GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -57,8 +60,9 @@ public class ThirdPersonShootingController : MonoBehaviour
             {
                 shotdelay = false;
                 Vector3 aimDir = (mouseWorldPosition - spawnBulletposition.position).normalized;
-                Debug.Log(aimDir);
+                //Debug.Log(aimDir);
                 Instantiate(pfBulletProjectile, spawnBulletposition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                audioSource.Play();
                 StartCoroutine(WaitForIt());
                 StarterAssetsInputs.shoot = false;
                 
